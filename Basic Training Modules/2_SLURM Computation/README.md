@@ -138,9 +138,9 @@ jobstats -j 11859032
 ```
 
 If you are interested in looking at the job statistics from recently completed jobs, here is a list of quearied job-ids below:
-> Human Connectome Pipeline Minimal Preprocessing: 12132032_1
-> fMRIPrep: 11507885 
-> FSL Diffusion Toolbox: 12093654_24
+> Human Connectome Pipeline Minimal Preprocessing: 12132032_1   
+> fMRIPrep: 11507885    
+> FSL Diffusion Toolbox: 12093654_24   
 
 ## Best Practices for Blanca-ICS Compute
 
