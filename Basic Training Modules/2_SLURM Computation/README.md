@@ -72,7 +72,7 @@ sacctmgr show account -s | grep blanca-ics | grep $USER
 Interactively:
 ```
 # lets start an interactive session on a HPC compute node and run our test script
-sinteractive --qos=blanca-ics --partition=blanca-ics --account=blanca-ics-training --cpus-per-task=1 --export=NONE
+sinteractive --qos=blanca-ics --partition=blanca-ics --account=blanca-ics-training-only --cpus-per-task=1 --export=NONE
 ```
 You should see a change in prefix on your terminal to indicate you are now running on a compute node [bnodeXXXX]
 ```
@@ -89,7 +89,7 @@ Next we will run the same test script from sbatch, we can again use very similar
 mkdir logs    # make a new directory of the output logs
 
 sbatch  --qos=blanca-ics --partition=blanca-ics \
-        --account=blanca-ics-test --cpus-per-task=1 \
+        --account=blanca-ics-training-only --cpus-per-task=1 \
         --job-name=hpc_tutorial_test  --error=logs/hcp_tutorial.e%j --out=logs/hcp_tutorial.o%j \
         test_script.sh
 ```
