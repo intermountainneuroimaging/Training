@@ -36,11 +36,14 @@ cd "Training/Basic Training Modules/2_SLURM Computation"
 
 # take a quick look at what's here
 ls 
+```
 
-# look at all the nodes we have to work with...
+New, lets look at all the nodes we have to work with...
+```
 sinfo
-
-# now lets look at only blanca-ics nodes (our priority nodes)
+```
+Or, only the nodes where we have priority, blanca-ics nodes
+```
 sinfo | grep blanca-ics 
 ```
 
