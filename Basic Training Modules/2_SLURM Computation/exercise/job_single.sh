@@ -9,7 +9,7 @@
 #SBATCH --error=logs/example.e%j
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=10M
-#SBATCH --ndoelist=bnode0101,bnode0301
+#SBATCH --nodelist=bnode0101,bnode0301
 
 # ---------------------------------------------------------------------------------------
 # EXAMPLE: Single Run
