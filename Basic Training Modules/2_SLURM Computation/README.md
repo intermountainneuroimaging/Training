@@ -65,6 +65,10 @@ nano test_script.sh
 chmod u+x test_script.sh
 ```
 Lets run our simple test script on HPC compute nodes
+First, we need to check if we have access to the training subaccount. Knowing what accounts you can use and when to use them is critical to make sure that the data and analysis rates are correctly tracked for each project / PI.
+```
+sacctmgr show account -s | grep blanca-ics | grep $USER
+```
 Interactively:
 ```
 # lets start an interactive session on a HPC compute node and run our test script
