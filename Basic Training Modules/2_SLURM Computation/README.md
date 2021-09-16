@@ -102,6 +102,17 @@ once it finishes, lets check what the logs say...
 for i in `ls logs`; do echo $i; cat logs/$i; done
 ```
 
+Finally, lets try running this test script on a different queue to make sure we can just on other blanca resources.
+```
+sbatch --qos=preemptable --partition=blanca-ccn \
+       --account=blanca-ics-training-only \
+       test_script.sh 
+```
+And lets check if its running...
+```
+squeue --partition=blanca-ccn --account=blanca-ics-traning-only 
+```
+
 ## Submitting Jobs in Parallel
 I think we have a hang of the basics... lets look at how we run more than one computation at once. To get started lets go into the exercise directory and make a few folders we will use to drop files later.
 
