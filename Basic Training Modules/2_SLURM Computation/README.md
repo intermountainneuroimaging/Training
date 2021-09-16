@@ -103,9 +103,14 @@ for i in `ls logs`; do echo $i; cat logs/$i; done
 ```
 
 ## Submitting Jobs in Parallel
-I think we have a hang of the basics... lets look at how we run more than one computation at once. 
+I think we have a hang of the basics... lets look at how we run more than one computation at once. To get started lets go into the exercise directory and make a few folders we will use to drop files later.
 
-`cd exercise; mkdir logs`
+```
+cd exercise 
+mkdir logs
+# for outputs from the example jobs
+mkdir -p $HOME/outputs
+```
 
 ### Job Array
 Compute jobs can be submitted as a job array by adding the `--array` flag in your list of options. Array jobs are great to use to control how many jobs can run in parallel if there are many jobs that need to be run from a list. Each iteration of the job is indicated by a environment variable `SLURM_ARRAY_TASK_ID`. We need to get a little creative sometimes if the jobs we are running are not sequentially ordered as this variable might suggest. Check out the below example to see how we can use a job array to create file from a list of names.
