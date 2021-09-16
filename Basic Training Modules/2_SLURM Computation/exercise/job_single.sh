@@ -3,7 +3,7 @@
 #SBATCH --job-name=example_script
 #SBATCH --qos=blanca-ics
 #SBATCH --partition=blanca-ics
-#SBATCH --account=blanca-ics-training
+#SBATCH --account=blanca-ics-training-only
 #SBATCH --time=00:05:00
 #SBATCH --output=logs/example.o%j
 #SBATCH --error=logs/example.e%j
