@@ -107,7 +107,7 @@ Open Access Data Duplicate on CURC ***Cons***:
 
 Since many researchers or institutions (including CU) are not ready to implement cloud based computing for cloud based datasets, we encourage all users to work towards a hybrid aproach where community datasets are retained only as long as ***necessary*** on CURC systems.
 
-![public dataset best practices on CURC resources](https://github.com/intermountainneuroimaging/Training/blob/main/Neuroimaging%20Boot%20Camp/HPC:%20Large%20Datasets%20on%20Summit/support-images/Interacting-with-Public-Data-graphic.jpg)
+![public dataset best practices on CURC resources](https://github.com/intermountainneuroimaging/Training/blob/main/Neuroimaging%20Boot%20Camp/2_HPC:%20Large%20Datasets%20on%20Summit/support-images/Interacting-with-Public-Data-graphic.jpg)
 
 ## Next steps, lets try it on some open access data!
 
