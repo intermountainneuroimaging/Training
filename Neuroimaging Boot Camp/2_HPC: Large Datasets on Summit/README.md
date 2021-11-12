@@ -252,6 +252,6 @@ Before we can conclude our tutorial, we need to make sure our workflow conforms 
 mv $SCRATCH_DIR/fsl_course_data/registration/results_${USER} /projects/$USER/
 ```
 
-## Up Next!! 
+## Up Next...
 ... Using database command line interfaces to interactively pull data using Amazon Web Services S3 Buckets and Datalad!!
 
