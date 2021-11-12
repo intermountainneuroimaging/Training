@@ -1,21 +1,21 @@
-# Interacting with Large Datasets: Best Practices
+
+# Interacting with Public Datasets: Best Practices
 
 With the push for open science, the availiblity of public neuroimaging datasets has drastically advanced in recent years, with many more datasets being shared each year. Scientific governing bodies such as the NIH, NSF, and others have put high priority on open science data for several reasons:
 1. Increase reporducibility of published work
 2. Increase exploration of new analytic techniques on existing data
-3. Expand research knowledge gained from any federally funded experiment
+3. Expand research knowledge gained from any federally funded research
 
 We will outline new best practices at the Intermountain Neuroimaging Consortium to support our users in participating in open science. All computations will be run using University of Coloraodo at Boulder Reserach Computing (CURC) compute cluster. If you do not have access to CURC please follow the steps [here](https://rcamp.rc.colorado.edu/accounts/account-request/create/organization) to get started.
 
 **Learning Objectives:**
-- Use CURC resources (SUMMIT or BLANCA high performance compute) to pull open access data
 - Use CURC large capactity file system for open access data storage (*currently only availible for SUMMIT*)
-- List guidelines for CURC **SUMMIT** scratch file system for data storage
+- List guidelines for CURC **Summit** scratch file system for data storage
 - Explore the use of open access data best practices
 
 ## Summit Scratch File System...
 
-For many research purposes, a local copy of open science data may be needed for additional computation or statistical analysis. Find a list of filesystems availible to CURC users below.
+For many research purposes, a local copy of open science data may be needed for additional computation or statistical analysis. Please find a list of filesystems availible to CURC users below.
 
 |  | <h5>Location</h5> | <h5>Quota</h5> | <h5>Use</h5> | <h5>Snapshot Backups</h5> | <h5>Name</h5> |
 | --- | --- | --- | --- | --- | --- |
@@ -30,8 +30,8 @@ For many research purposes, a local copy of open science data may be needed for 
 
 INC best practices, we recommend you use **Summit Scratch Datasets Filesystem** to store all open access datasets. As this filesystem is a *community* resource, please remember:
  - **Always** check owner and group permissions for directory structure and files
- - Include a README.txt or similar file to describe the dataset (include data use agreements as needed and exporiation dates for locally stored files)
- - Do not store any derivative/computational output data -- these files must be moved to your team's PetaLibrary allocation
+ - Include a README.txt or similar file to describe the dataset (include data use agreements as needed and expiration dates for locally stored files)
+ - **Do not store** any derivative/computational output data -- these files must be moved to your team's PetaLibrary allocation
  - Use clear naming conventions for all files
 
 
@@ -41,7 +41,7 @@ If you are looking for a storage location with more flexiblity, consider using *
 
 ## Summit Compute Resources 
 
-If you are not familiar with using reserach computing compute resources on Blanca, please visit the INC Basic Training modules [here](https://docs.google.com/document/d/1hxN2ZC7WGrJ8e2KCV2xaf5U1t501QcZOVm9SO2vlRIQ/edit?usp=sharing).
+If you are not familiar with using reserach computing resources, please visit the INC Basic Training modules [here](https://docs.google.com/document/d/1hxN2ZC7WGrJ8e2KCV2xaf5U1t501QcZOVm9SO2vlRIQ/edit?usp=sharing).
 
 Summit Computing Cluster is a free, University funded computing cluster managed by CURC. <br>
 
@@ -52,37 +52,38 @@ ssh -X <identikey>@login.rc.colorado.edu
 
 ### Accessing Software Modules and Mounted Filesystems
 
-To access modules or scratch mounted filesystems on **Summit** you must first launch a compile or compute node session
+To access modules or scratch mounted filesystems on **Summit**, you must first launch a compile or compute node session,
 
 | | Bash Command | 
 | --- | --- | 
 | <h5>Compile Node</h5> | `ssh scompile` |
-| <h5>Interactive Compute Node</h5> | `sinteractive --partition=shas --time=00:01:00 --nodes=1`| 
+| <h5>Interactive Compute Node</h5> | `sinteractive --partition=shas --time=01:00:00 --nodes=1`| 
 
 ***Lets try it...***
 
 
 ```bash
 # Run lauch compile session if you are not already on a compile or compute node
-sinteractive --partition=shas --time=00:30:00
+# sinteractive --partition=shas --time=01:00:00 --nodes=1
 ```
 
+
 ```bash
- # lets check which versions of python are availible
+# lets check which versions of python are availible
 module spider python
- 
+
 # next lets check which versions of FSL (ICS specific software) are availible
 module use /projects/ics/modules
 module spider FSL
 ```
 
-> **WARNING:** Some Custom Modules have issues on Summit based on the restrictive libs. Best practice is to use custom software within singularity containers instead of software modules.
+> **WARNING:** Some Custom Modules have issues on Summit based on the restrictive libraries. Best practice is to use custom software within singularity containers instead of software modules.
 >> ***If you run into problems contact Amy Hegarty or Lena Sherbakov***
 
 
 ### Priority Job Submissions on Summit
 
-All CURC users may use the summit commuting cluster mostly on a first come first serve basis. For *heavy users*, pripority will be decreased when the queue is full, leading to longer wait time. If you are interested in testing your job scripts on Summit and need a priority account, please contact Amy Hegarty (Amy.Hegarty@colorado.edu) or Lena Sherbakov (Lena.Sherbakov@colorado.edu). 
+All CURC users may use the summit commuting cluster *mostly* on a first come first serve basis. For *heavy users*, priority will be decreased when the queue is full, leading to longer wait times. If you are interested in testing your job scripts on Summit and need a priority account, please contact Amy Hegarty (Amy.Hegarty@colorado.edu) or Lena Sherbakov (Lena.Sherbakov@colorado.edu). 
 
 ***Priority Job submission:***
 ```bash
@@ -95,25 +96,28 @@ Looking for more help? Check out research computing documentation [here](https:/
 
 While keeping a duplicate copy of all the open access data you anticipate needing for your research on our local servers may sound appealing, lets stop and consider some pros and cons:
 
-Open Access Data Duplicate on CURC ***Pros***:
-- Fast and reliable access to your data any time
+***Pros*** of duplicate dataset downloads:
+- Fast and reliable access to your dataset any time
 - Searchable metadata for all files
-- ...
+- "Traditional" method to access datasets
 
-Open Access Data Duplicate on CURC ***Cons***:
+***Cons*** of duplicate dataset downloads:
 - Expensive and occupies space on shared resources
-- Duplicate of data already stored offsite
-- Risk breaking privacy or time limits agreed to in Data Use Agreements
+- *Duplicates* data already stored offsite
+- Risk breaking privacy or time limit agreements in Data Use Agreements
 
 Since many researchers or institutions (including CU) are not ready to implement cloud based computing for cloud based datasets, we encourage all users to work towards a hybrid aproach where community datasets are retained only as long as ***necessary*** on CURC systems.
 
+#### What does this mean in practice?
+Many public data repositories such as UK Biobank, OpenNeuro, AWS, NIMH all have an interactive command line interface (CLI) so that users can programatically "pull/push" or download/upload data to their repositories in small pieces. In the figure below, we describe the best practice for cloud based public datasets. Where in users (1) ***Identify*** the data repository housing the dataset of choice and complete all necessary user agreements; (2) ***Define*** the collection of interest including desired sessions and image modalities to iterate over in small *batchs*; (3) ***Pull*** a subset of the data based on the desired collection; (4) ***Run*** any required local computations or statistical analysis; (5) ***Push*** result files to a permanent storage location; (5) ***Dump*** all downloaded and generated files.
+
 ![public dataset best practices on CURC resources](https://github.com/intermountainneuroimaging/Training/blob/main/Neuroimaging%20Boot%20Camp/2_HPC:%20Large%20Datasets%20on%20Summit/support-images/Interacting-with-Public-Data-graphic.jpg)
 
-## Next steps, lets try it on some open access data!
+What if you don't think your dataset or analysis plan meets best practices described here? We can help! Please contact Amy Hegarty (Amy.Hegarty@colorado.edu) or Lena Sherbakov (Lena.Sherbakov@colorado.edu).
 
-Most public data repositories have a command line interface (CLI) or application programming interface (API) so that users can programatically reterive small buckets of the dataset at one time. 
+## Next steps, lets try it on some community data!
 
-For example, amazon web services (AWS) has its own interface where you may interact with the data on the amazon servers, or download the data to work with it on CURC system. In the following tutorial we will show how you can use AWS to interact with the Human Connectome Project open access data.
+The following example will showcase how you can run traditional neuroimaging analyses on community imaging datasets using Summit compute resources. In this example, the dataset has already been downloaded and stored in the ***Summit Scratch Datasets Filesystem*** to save time. 
 
 Lets start by setting up where the data will go...
 
@@ -133,16 +137,16 @@ ls -l $SCRATCH_DIR
 cd $SCRATCH_DIR/fsl_course_data
 ```
 
-You can see that several datasets have restrictive access groups, such as abcdgrp for the ABCD dataset. If you are interested in using a dataset already downloaded on Summit Scratch Datasets please contact amy.hegarty@colorado.edu or lena.sherbakov@colorado.edu with proof of an active data use agreement (or equivalent).
+You can see that several datasets have restrictive access groups, such as abcdgrp for the ABCD dataset. If you are interested in using a dataset already downloaded on Summit Scratch Datasets please contact amy.hegarty@colorado.edu or lena.sherbakov@colorado.edu with proof of an active data use agreement (or equivalent user rights documentation).
 
 ### FSL - Registration Tutorial
 This tutorial has been compressed from the FSL registration tutorial for the self paced [course](https://open.win.ox.ac.uk/pages/fslcourse/practicals/registration/index.html). 
 
 > In this practical you will explore each of the registration steps within a standard two-step registration for functional images. Then we will see how to apply and invert transformations. Being able to achieve precise registrations is CRUCIAL for structural, functional and diffusion image analysis. If registrations are not accurate, further statistics at a structural or group level will not be accurate.
-> <div style="text-align: right"><i> -- FSL Registration Tutorial </i></div>
+> <div style="text-align: right"><i> -- FSL Registration Tutorial <i/></div>
 
 #### Brain Extraction
-...
+Before performing any form of high resolution registration, we first need to use our subject high resolution structural image to define the brain boundaries. The reason we do this before registration is because non-brain tissue within the image can result in poor registration. Be define the brain boundary using a brain extraction tool (BET). 
 
 
 ```bash
@@ -160,7 +164,9 @@ bet STRUCT.nii.gz results_${USER}/STRUCT_brain.nii.gz -m
 ```
 
 #### Two Stage Registration EPI -> T1w -> Standard
-...
+Registration is a key step in magnetic resonance image preprocessing as it allows us to equate the voxel locations in our image to anatomical locations in the brain, across multiple subjects. We can leaverage standardizing voxel location to make spatial inferences about our neuroimaging data (the primary component of MR research!). 
+
+In most cases, we are using a low resolution (meaning poor contrast or spatial resolution) and looking to register these data to a standard brain template. By including a high resolution brain scan as an intermediate step, we can acheive much higher registration quality.
 
 
 ```bash
@@ -212,7 +218,13 @@ echo "Registration COMPLETE"
 ```
 
 #### Using Singularity Containers
-...
+Containerization, or the act of building a software enviornment independent of the host system, has huge advantages and has become a common tool used by researchers for many reasons. We will dive into the use of containers in a subesquent training module, but we introduce containers here as an easy method to run custom software on the restrictive ***Summit Compute Environment***. 
+
+You may ask, we just finished an example using FSL (a custom neuroimaging software) on Summit without using containers, why do we care... Unfortunately, not all custom software cooperates with Summit Compute Environment. Unlike Blanca Compute, we do not own the compute resources and therefore cannot make necessary changes to the compute environment required by some custom software. ***...That means we are stuck using containers!!***
+
+Despite some hesitance, containers have huge benifits in building reporducible and transparent research methodology, so your efforts are not in vain!
+
+Below, we will run brain extraction for our sample dataset again, this time, using a containerized version of FSL.
 
 
 ```bash
@@ -231,10 +243,19 @@ singularity exec -B $inputs:/data -B $outputs:/out $img bet /data/STRUCT.nii.gz 
 
 ```
 
+#### Thats All Folks!! ... Actually, not quite!
+Before we can conclude our tutorial, we need to make sure our workflow conforms to the best practices we laid out at the beggining of this training document. We need to move all of our result files off the community dataset allocation to a permanent storage location.
+
 
 ```bash
 # !! MOVE RESULTS OFF SCRATCH !!
 mv $SCRATCH_DIR/fsl_course_data/registration/results_${USER} /projects/$USER/
 ```
 
-Up Next!! ... Using database command line interfaces to interactively pull data using Amazon Web Services S3 Buckets and Datalad!!
+## Up Next!! 
+... Using database command line interfaces to interactively pull data using Amazon Web Services S3 Buckets and Datalad!!
+
+
+```bash
+
+```
