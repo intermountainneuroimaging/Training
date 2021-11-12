@@ -25,8 +25,8 @@ Before we get started, each user will need to generate an account on the human c
 
 
 ```bash
-export AWS_ACCESS_KEY_ID=<key-id>               #AKIAXO65CT57BKPAKPG3
-export AWS_SECRET_ACCESS_KEY=<secret-key-id>    #vUKqlL8n4kLWMKMVEejCatRfHQ967iCymJDKsfv0
+export AWS_ACCESS_KEY_ID=<key-id>              
+export AWS_SECRET_ACCESS_KEY=<secret-key-id>    
 export AWS_DEFAULT_REGION=us-west-2
 ```
 
