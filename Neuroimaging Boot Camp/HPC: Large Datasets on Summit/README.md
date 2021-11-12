@@ -1,4 +1,4 @@
-# Interacting with Public Datasets: Best Practices
+# Interacting with Large Datasets: Best Practices
 
 With the push for open science, the availiblity of public neuroimaging datasets has drastically advanced in recent years, with many more datasets being shared each year. Scientific governing bodies such as the NIH, NSF, and others have put high priority on open science data for several reasons:
 1. Increase reporducibility of published work
@@ -64,7 +64,7 @@ To access modules or scratch mounted filesystems on **Summit** you must first la
 
 ```bash
 # Run lauch compile session if you are not already on a compile or compute node
-# ssh scompile
+ssh scompile
 
 # lets check which versions of python are availible
 module spider python
