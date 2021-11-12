@@ -64,69 +64,17 @@ To access modules or scratch mounted filesystems on **Summit** you must first la
 
 ```bash
 # Run lauch compile session if you are not already on a compile or compute node
-ssh scompile
-
-# lets check which versions of python are availible
-module spider python
+sinteractive --partition=shas --time=00:30:00
 ```
 
-    Rebuilding cache, please wait ... (written to file) done.
-    
-    ----------------------------------------------------------------------------
-      python:
-    ----------------------------------------------------------------------------
-        Description:
-          Python Programming Language
-    
-         Versions:
-            python/2.7.11
-            python/2.7.14
-            python/3.5.1
-            python/3.6.5
-    
-    ----------------------------------------------------------------------------
-      For detailed information about a specific "python" module (including how to load the modules) use the module's full name.
-      For example:
-    
-         $ module spider python/3.6.5
-    ----------------------------------------------------------------------------
-    
-
-
-
 ```bash
+ # lets check which versions of python are availible
+module spider python
+ 
 # next lets check which versions of FSL (ICS specific software) are availible
 module use /projects/ics/modules
 module spider FSL
 ```
-
-    Rebuilding cache, please wait ... (not written to file) done
-    
-    ----------------------------------------------------------------------------
-      fsl:
-    ----------------------------------------------------------------------------
-         Versions:
-            fsl/4.1.8
-            fsl/5.0.2.2
-            fsl/5.0.4
-            fsl/5.0.5
-            fsl/5.0.6-slurm
-            fsl/5.0.6
-            fsl/5.0.7-test
-            fsl/5.0.8
-            fsl/5.0.9
-            fsl/5.0.10
-            fsl/5.0.11
-            fsl/6.0.3
-    
-    ----------------------------------------------------------------------------
-      For detailed information about a specific "fsl" module (including how to load the modules) use the module's full name.
-      For example:
-    
-         $ module spider fsl/6.0.3
-    ----------------------------------------------------------------------------
-    
-
 
 > **WARNING:** Some Custom Modules have issues on Summit based on the restrictive libs. Best practice is to use custom software within singularity containers instead of software modules.
 >> ***If you run into problems contact Amy Hegarty or Lena Sherbakov***
@@ -184,14 +132,6 @@ ls -l $SCRATCH_DIR
 # we will be working with the fsl_course data
 cd $SCRATCH_DIR/fsl_course_data
 ```
-
-    total 0
-    drwxr-x---  3 amhe4269 abcdgrp          4096 Nov 11 14:05 ABCD
-    drwxr-x--- 14 amhe4269 pl-ics-community 4096 Nov 11 13:09 fsl_course_data
-    drwxr-x---  4 amhe4269 hcpgrp           4096 Nov 11 11:08 hcp
-    -rw-r--r--  1 ics      icspgrp           234 Oct 21 08:57 samplejob.sh
-    drwxr-x---  4 amhe4269 icspowergrp      4096 Oct  8 10:59 snr_comparison
-
 
 You can see that several datasets have restrictive access groups, such as abcdgrp for the ABCD dataset. If you are interested in using a dataset already downloaded on Summit Scratch Datasets please contact amy.hegarty@colorado.edu or lena.sherbakov@colorado.edu with proof of an active data use agreement (or equivalent).
 
@@ -270,13 +210,6 @@ convert_xfm -inverse -omat standard2example_func.mat example_func2standard.mat
 echo "Registration COMPLETE"
 
 ```
-
-    Total origina volumes: 380
-    Running FAST segmentation
-    FLIRT pre-alignment
-    Running BBR
-    1.014470 0.995076 0.068426 0.071699 0.000000 -0.076077 0.991008 0.110067 0.000000 -0.063523 -0.114980 0.991335 0.000000 7.800981 -2.923377 -13.977699 1.000000 
-
 
 #### Using Singularity Containers
 ...
