@@ -199,7 +199,7 @@ You can see that several datasets have restrictive access groups, such as abcdgr
 This tutorial has been compressed from the FSL registration tutorial for the self paced [course](https://open.win.ox.ac.uk/pages/fslcourse/practicals/registration/index.html). 
 
 > In this practical you will explore each of the registration steps within a standard two-step registration for functional images. Then we will see how to apply and invert transformations. Being able to achieve precise registrations is CRUCIAL for structural, functional and diffusion image analysis. If registrations are not accurate, further statistics at a structural or group level will not be accurate.
-> <div style="text-align: right"><i> -- FSL Registration Tutorial <i/></div>
+> <div style="text-align: right"><i> -- FSL Registration Tutorial </i></div>
 
 #### Brain Extraction
 ...
