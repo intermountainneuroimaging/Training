@@ -19,7 +19,7 @@ Before we get started, each user will need to generate an account on the human c
 4. Click on data use terms and follow the instructiosns
 5. Open the Amazon S3 Access Window, and record both the access Key and Secret Key for use later.
 
-![database screen for human connectome project page](pics/human-connectome-project-img1.png)
+![database screen for human connectome project page](https://github.com/intermountainneuroimaging/Training/blob/main/Neuroimaging%20Boot%20Camp/3_Public-Datasets-with-AWS/support_images/human-connectome-project-img1.png)
 
 *Enter your access key information below:*
 
