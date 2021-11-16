@@ -124,15 +124,34 @@ ls -l $SCRATCH_DIR/HCP/${subj}/*/*/*
 
 
 ```bash
-## add sync command to ignore existing commands (test this functionality)
+# if you are working with a dataset that has already been partially downloaded, you can pull only the absent files using...
+aws s3 sync s3://hcp-openaccess/HCP/${subj}/unprocessed/3T/T1w_MPR1 \
+               $SCRATCH_DIR/HCP/${subj}/unprocessed/3T/T1w_MPR1 --quiet 
+               
 ```
 
-An additional step you may choose to take is to convert the human connectome uprocessed (raw) images to BIDS compatible format. This allow you to use pipelines dedicated to preprocessing BIDS datasets such as `MRIQC` or `fMRIPrep`
+Since the Human Connectome Project datasets User Agreement requires users to restrict access to any data locally downloaded, we need to confirm the new data has the correct user group and permissions.
+
+
+```bash
+# set user and group permissions to read-write and other to none
+chmod -R 770 $SCRATCH_DIR/HCP/${subj}
+
+# make sure group is set to hcpgrp user group
+chgrp -R hcpgrp $SCRATCH_DIR/HCP/${subj}
+
+```
+
+An additional step you may choose to take is to convert the human connectome uprocessed (raw) images to BIDS compatible format. This allow you to use pipelines dedicated to preprocessing BIDS datasets such as `MRIQC` or `fMRIPrep`. 
+
+Keeping with best practices from our previous tutorial, we will create a results folder first that will be pushed to a permanent storage location, then deleted.
 
 
 ```bash
 cd $SCRATCH_DIR/
-mkdir -p $SCRATCH_DIR/HCP_BIDS
+
+RESULTS_DIR=$SCRATCH_DIR/HCP/results_${USER}
+mkdir -p $RESULTS_DIR
 
 module load python/3.6.5
 
@@ -141,7 +160,7 @@ if ! [ -d hcp2bids ]; then git clone https://github.com/niniko1997/hcp2bids.git 
 cd hcp2bids/hcp2bids
 
 #convert hcp subjects to bids compatible
-python main.py $SCRATCH_DIR/HCP $SCRATCH_DIR/HCP_BIDS --symlink > hcp2bids.log
+python main.py $SCRATCH_DIR/HCP $RESULTS_DIR --symlink > hcp2bids.log
 
 # note: some bids tools require extra files not created from this function:
 #     T1w.json, T2w.json, dataset_description.json, .bidsignore
@@ -150,17 +169,12 @@ python main.py $SCRATCH_DIR/HCP $SCRATCH_DIR/HCP_BIDS --symlink > hcp2bids.log
 
 
 ```bash
-ls $SCRATCH_DIR/HCP_BIDS
+ls $RESULTS_DIR
 ```
 
 
 ```bash
-# finally, its important to dump all local files when you are done using them
-rm -R $SCRATCH_DIR/HCP
-rm -R $SCRATCH_DIR/HCP_BIDS
-```
-
-
-```bash
+# finally, its important to move all result files to a permanent storage location
+mv $RESULTS_DIR /projects/$USER/
 
 ```
