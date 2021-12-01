@@ -111,7 +111,7 @@ Since many researchers or institutions (including CU) are not ready to implement
 #### What does this mean in practice?
 Many public data repositories such as UK Biobank, OpenNeuro, AWS, NIMH all have an interactive command line interface (CLI) so that users can programatically "pull/push" or download/upload data to their repositories in small pieces. In the figure below, we describe the best practice for cloud based public datasets. Where in users (1) ***Identify*** the data repository housing the dataset of choice and complete all necessary user agreements; (2) ***Define*** the collection of interest including desired sessions and image modalities to iterate over in small *batchs*; (3) ***Pull*** a subset of the data based on the desired collection; (4) ***Run*** any required local computations or statistical analysis; (5) ***Push*** result files to a permanent storage location; (5) ***Dump*** all downloaded and generated files.
 
-![public dataset best practices on CURC resources](https://github.com/intermountainneuroimaging/Training/blob/main/Neuroimaging%20Boot%20Camp/2_HPC:%20Large%20Datasets%20on%20Summit/support-images/Interacting-with-Public-Data-graphic.jpg)
+![public dataset best practices on CURC resources](https://github.com/intermountainneuroimaging/Training/blob/main/Neuroimaging%20Boot%20Camp/2_HPC:%20Large%20Datasets%20on%20Summit/support-images/Interacting-with-public-data-graphic.jpg)
 
 What if you don't think your dataset or analysis plan meets best practices described here? We can help! Please contact Amy Hegarty (Amy.Hegarty@colorado.edu) or Lena Sherbakov (Lena.Sherbakov@colorado.edu).
 
