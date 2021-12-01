@@ -146,7 +146,7 @@ This tutorial has been compressed from the FSL registration tutorial for the sel
 > <div style="text-align: right"><i> -- FSL Registration Tutorial </i></div>
 
 #### Brain Extraction
-Before performing any form of high resolution registration, we first need to use our subject high resolution structural image to define the brain boundaries. The reason we do this before registration is because non-brain tissue within the image can result in poor registration. Be define the brain boundary using a brain extraction tool (BET). 
+Before performing any form of high resolution registration, we first need to use our subject high resolution structural image to define the brain boundaries. The reason we do this before registration is because non-brain tissue within the image can result in poor registration. We define the brain boundary using a brain extraction tool (BET). 
 
 
 ```bash
@@ -219,6 +219,8 @@ echo "Registration COMPLETE"
 
 #### Using Singularity Containers
 Containerization, or the act of building a software enviornment independent of the host system, has huge advantages and has become a common tool used by researchers for many reasons. We will dive into the use of containers in a subesquent training module, but we introduce containers here as an easy method to run custom software on the restrictive ***Summit Compute Environment***. 
+
+![basic container schematic showing the independence of binary and library files within the container from the operating system](https://github.com/intermountainneuroimaging/Training/blob/main/Neuroimaging%20Boot%20Camp/2_HPC:%20Large%20Datasets%20on%20Summit/support-images/Docker%20Scheme.jpg)
 
 You may ask, we just finished an example using FSL (a custom neuroimaging software) on Summit without using containers, why do we care... Unfortunately, not all custom software cooperates with Summit Compute Environment. Unlike Blanca Compute, we do not own the compute resources and therefore cannot make necessary changes to the compute environment required by some custom software. ***...That means we are stuck using containers!!***
 
