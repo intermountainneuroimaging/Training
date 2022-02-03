@@ -1,0 +1,51 @@
+# How to install python packages for use in Jupyterhub
+
+# update your condarc file as follows...
+# first thing, lets save a backup copy of your current .condarc file (if present)
+if [ -f $HOME/.condarc ]; then 
+    if ! [ -f $HOME/.condarc_backup ]; then 
+        cp $HOME/.condarc $HOME/.condarc_backup;
+    fi
+fi
+
+# Create .condarc if it doesn't exist
+if ! [ -f $HOME/.condarc ]; then 
+    touch $HOME/.condarc
+    echo "pkgs_dirs:  " > $HOME/.condarc
+    echo "  - /projects/$USER/.conda_pkgs" >> $HOME/.condarc
+    echo "envs_dirs:" >> $HOME/.condarc
+    echo "  - /projects/$USER/software/anaconda/envs" >> $HOME/.condarc
+    echo "  - /projects/ics/software/anaconda/envs" >> $HOME/.condarc
+fi
+
+# If .condarc exists but path to datalad conda enviornment doesn't exist... add it
+if ! grep -Fxq "  - /projects/ics/software/anaconda/envs" $HOME/.condarc; 
+then
+    # insert path to ics conda enviornment
+    sed -i '/envs_dirs:/a\\  - /projects/ics/software/anaconda/envs' $HOME/.condarc ;
+fi
+
+
+# next launch Conda...
+source /curc/sw/anaconda3/latest
+
+# create a new custom environment.. check that the install location is /projects/<identikey>/software/anaconda/envs
+conda create -n <envname>
+
+# activate new environment
+conda activate <envname>
+
+# install the require jupyterhub kernel package
+conda install -y ipykernel
+
+#install any other packages you want / need
+conda install -c conda-forge nilearn
+
+# link you Conda environment to jupyterhub kernel
+python -m ipykernel install --user --name <envname> --display-name <envname>
+
+# launch jupyterhub and look for the new kernel!
+
+# you can install new packages by
+conda activate <envname>
+conda install...
