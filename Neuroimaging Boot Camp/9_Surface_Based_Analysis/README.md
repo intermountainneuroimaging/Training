@@ -26,7 +26,10 @@ fsfeat_2_stats
 
 These wrappers use freesufer tools:
 ```
-...
+reg-feat2anat  # Used to generate surface registration within feat 1st level model data strucutre
+feat2surf      # Used to sample feat outputs onto surface within chosen template space
+mri_glmfit     # group stats command for running statistics on surface (or volume) based models
+
 ```
 
 Which use a pre-generated freesufer surface reconstruction and pre-generated feat first level model for the same subject / session. Using the computed registration matix between the functional and high res space for the subject, freesurfer generates a new registration from the functional space to surface space. Next, the functional results are sampled onto the surface and registered together in the standard MNI space. Finally, group level statistics are run (fixed and random effect models can be used). 
