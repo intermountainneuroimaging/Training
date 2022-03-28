@@ -1,0 +1,89 @@
+#!/bin/bash
+#
+# SYNATX fsfeat_2_stats <lower_feat_filenames> <resultsdir>
+#
+# DESCRIPTION: Method to run surface based analysis for FEAT models. 
+#              Interface between freesurfer and fsl used for the following
+#              analysis. This should be used only for a single group mean
+#              group level model. More advanced model designs will be discussed
+#              later. 
+#
+# PREREQUISITES: freesurfer reconstruction should be complete for all subjects
+#                used in this analysis
+#
+# STEPS: (1) register feat model to subject's surface space in freesurfer
+#        (2) registar all stats to common standard space
+#        (3) group level analysis (each hemisphere seperate)
+#
+# AKH 3-15-2022
+# -------------------------------------------------------------------------------
+# Run on a compute node!
+
+function parse_args () {
+	# parse inputs
+	featdirs=()
+	subjects=()
+	while read sid fid ; do 
+		featdirs+=("$fid"); 
+		subjects+=($sid) ;
+	done < $1
+
+	dt=`date +"%Y-%m-%d"`
+	resultsdir=${2:-$SUBJECTS_DIR/featresults/analysis-$dt}
+	mkdir -p $resultsdir
+
+}
+
+function main () {
+
+	parse_args "$@"
+
+	# concat results of all copes (and varcopes)
+	feat=`ls -d ${featdirs[0]} | head -n 1`
+	hemis="lh rh"
+	copes=`ls $feat/stats/*cope*.nii.gz | rev | cut -d"/" -f1 | rev | cut -d"." -f1`  # list of copes in lower models
+
+	
+	 for stat in $copes ; do 
+		for hm in $hemis ; do
+			if ! [ -f $resultsdir/${hm}.${stat}.mgh ]; then
+				files=$(for i in ${featdirs[@]} ; do echo $i/reg_surf-${hm}-fsaverage/stats/${stat}.nii.gz ; done)
+				mri_concat $files --o $resultsdir/${hm}.${stat}.mgh
+			else
+				echo "WARNING: $resultsdir/${hm}.${stat}.mgh already exists...not overwriting"
+			fi
+		done
+	done
+
+	# run basic group level statistics, random effects analysis
+	cd $resultsdir
+	for i in `ls *.cope*.mgh` ; do
+		hemi=`echo $i | cut -d"." -f1`
+		cope=`echo $i | cut -d"." -f2`
+		mri_glmfit --y $i \
+		           --osgm --glmdir ${hemi}.${cope}.osgm.rfx --surf fsaverage lh \
+		           --label $SUBJECTS_DIR/fsaverage/label/${hemi}.cortex.label \
+		           --eres-save
+    done
+
+    # finally, view the results
+    freeview -f $SUBJECTS_DIR/fsaverage/surf/lh.inflated:annot=aparc.annot:annot_outline=1:overlay=$PWD/lh.cope1.osgm.rfx/osgm/sig.mgh:overlay_threshold=4,6 -viewport 3d
+}
+
+
+function cleanup () {
+	echo ""
+	echo "*************************************"
+	echo "Running cleanup..."
+	# remove all links from feat dirs
+	links=`find $SUBJECTS_DIR/feat -type l`
+	for i in $links; do
+		echo "Removing soft link:" `basename $i`
+		unlink $i
+	done
+
+
+}
+
+#execute script...
+main "$@"
