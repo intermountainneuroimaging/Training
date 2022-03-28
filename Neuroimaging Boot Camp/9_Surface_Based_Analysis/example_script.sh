@@ -2,7 +2,7 @@
 # This tool leverages freesurfer tools resample FEAT results to surface space
 
 # These tools are a work in progress! Questions or concerns, contact:
-# Amy Hegarty, amh.hegarty@colorado.edu
+# Amy Hegarty, amy.hegarty@colorado.edu
 
 # add surface tools to path
 export PATH="/projects/ics/tools/surface_analysis_tools/:$PATH"
@@ -83,3 +83,6 @@ fsl_sub -n 2 -N fsfeat_3_sim -l $logdir $cmd
 freeview -f $SUBJECTS_DIR/fsaverage/surf/lh.inflated:annot=aparc.annot:annot_outline=1:overlay=$resultsdir/lh.cope1.osgm.rfx/osgm/abs.sig.masked.mgh:overlay_threshold=1,6 -viewport 3d
 
 freeview -f $SUBJECTS_DIR/fsaverage/surf/lh.pial:annot=aparc.annot:annot_outline=1:overlay=$resultsdir/lh.cope1.osgm.rfx/osgm/abs.sig.masked.mgh:overlay_threshold=1,6 -viewport 3d
+
+# follow the steps outlined here to make a gif of the results
+# https://surfer.nmr.mgh.harvard.edu/fswiki/makeagif
