@@ -26,15 +26,17 @@ fsfeat_2_stats
 
 These wrappers use freesufer tools:
 ```
-reg-feat2anat  # Used to generate surface registration within feat 1st level model data strucutre
-feat2surf      # Used to sample feat outputs onto surface within chosen template space
-mri_glmfit     # group stats command for running statistics on surface (or volume) based models
-
+reg-feat2anat    # Used to generate surface registration within feat 1st level model data strucutre
+feat2surf        # Used to sample feat outputs onto surface within chosen template space
+mri_glmfit       # group stats command for running statistics on surface (or volume) based models
+mri_glmfit-sim   # freesurfer randomise tool (generates cluster corrected results) 
 ```
 
 Which use a pre-generated freesufer surface reconstruction and pre-generated feat first level model for the same subject / session. Using the computed registration matix between the functional and high res space for the subject, freesurfer generates a new registration from the functional space to surface space. Next, the functional results are sampled onto the surface and registered together in the standard MNI space. Finally, group level statistics are run (fixed and random effect models can be used). 
 
-**Check out the INC tutorial to use the wrapper scripts on CURC resources (here)[].**
+**Check out the INC tutorial to use the wrapper scripts on CURC resources [here](https://github.com/intermountainneuroimaging/Training/blob/main/Neuroimaging%20Boot%20Camp/9_Surface_Based_Analysis/example_script.sh).**
+
+For more information about using freesurfer tools with FSL's FEAT models, visit [FslFeatFreeSurfer Tutorial](https://surfer.nmr.mgh.harvard.edu/fswiki/FsTutorial/FslFeatFreeSurfer).
 
 # Using Surface Based Tools in AFNI
 An alternative method is to use AFNI for surface based analysis. AFNI, which includes a suite of tools for fMRI preprocessing, model fitting, and group analysis also includes built in surface based tools. If you are interested in running fMRI preprocessing in surface space, this is probabaly the right tool for you! 
