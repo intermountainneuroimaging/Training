@@ -1,0 +1,66 @@
+#!/bin/bash
+#
+# SYNATX fsfeat_1_reg <lower-feat> <freesurfer subject id>
+#
+# INPUTS: <lower-feat>       Path to lower level feat model (lowermodel.feat)
+#         <freesurfer sid>   Subject id / name for freesurfer reconstrucion 
+#
+# DESCRIPTION: Step 1 in the method to run surface based analysis for FEAT models. 
+#              Freesurfer tools, discussed here: 
+#              https://surfer.nmr.mgh.harvard.edu/fswiki/FsTutorial/FslFeatFreeSurfer.  
+#
+# PREREQUISITES: freesurfer reconstruction should be complete for all subjects
+#                used in this analysis
+#
+# NOTES:  SUBJECTS_DIR must be defined and pointing to the FS subjects directory.
+#
+# STEPS: (1) register feat model to subject's surface space in freesurfer
+#        (2) registar all stats to common standard space
+#
+# TO DO: --add help menu and parsing
+#
+# AKH 3-15-2022
+# -------------------------------------------------------------------------------
+# Run on a compute node!
+
+function parse_args () {
+	# parse inputs
+	featdir=$1
+	if ! [ -d $featdir ] ; then
+		echo "ERROR: feat directory not found"
+		exit 1
+	fi
+
+	subj=$2
+	if ! [ -d $SUBJECTS_DIR/$subj ] ; then
+		echo "ERROR: freesurfer subject cannot be located, check $SUBJECTS_DIR"
+	fi
+}
+
+function main () {
+
+	parse_args "$@"
+
+	# run registraction for feat/stats -> freesurfer surfaces, outputs written to *.feat/reg/freesurfer
+	if ! [ -d $featdir/reg/freesurfer ] ; then
+		echo "Running Freesurfer Registration: "
+		echo "$subj" "$featdir"
+		reg-feat2anat --feat "$featdir" --subject "$featdir"
+	else
+		echo "Registration already exists: $featdir"
+	fi
+
+	# resample stats map on surface in common space (fsaverage), outputs written to *.feat/reg_surf-<hemi>-fsaverage/stats
+	#   note: outputs are written as *.nii.gz  BUT coordinates are surface space - read Freesurfer docs for more info: feat2surf --help
+	if ! [ -d $featdir/reg_surf-lh-fsaverage ] ; then
+		echo "Resampling FEAT statmaps to surface: $featdir"
+		feat2surf --feat $featdir --cope-only
+	else
+		echo "Resampling FEAT statmaps already exists: $featdir"
+	fi
+
+}
+
+
+#execute script...
+main "$@"
